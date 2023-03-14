@@ -1,0 +1,27 @@
+{% extends "layout.html" %} {% block title%}{% endblock title%} {% block main%}
+{{ super() }}
+<div class="info">
+  <h3>Edit your post?</h3>
+  {% if joke[1]==None%}
+  <form action="/edit_joke?id={{joke_id}}" method="POST">
+    <div>
+        <textarea
+          rows="4"
+          name="new_post"
+          class="review_text"
+          placeholder="Please write down your joke"
+          required
+        >{{joke[2]}}</textarea>
+        <div><input type="submit" value="Update" class="submit" /></div>
+  </form>
+    {% else %}
+    <form action="/edit_joke?id={{joke_id}}" method="POST" enctype=multipart/form-data>
+    <div>
+       <input type="file" name="new_image" required />
+       <input type="submit" value="Update" class="submit" />
+       </div>
+      </form>
+    {% endif %}
+</div>
+<div><a href="/" class="footer">Back to search page</a></div>
+{% endblock main%}

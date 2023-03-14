@@ -1,0 +1,14 @@
+{% extends "layout.html" %} {% block title%}{% endblock title%} {% block main%}
+{{ super() }}
+<div class="info">
+  {% for item in user%}
+  <div>{{item}}</div>
+  {% endfor %}
+
+  <form action="/delete-users" method="Post">
+    <input type="text" value="{{user[0]}}" name="id" hidden />
+    <div><input type="submit" class="submit" value="confirm" /></div>
+  </form>
+</div>
+<div><a class="footer" href="/admin">Back to admin page</a></div>
+{% endblock main%}

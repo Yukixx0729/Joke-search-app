@@ -1,0 +1,14 @@
+{% extends "layout.html" %} {% block title%}{% endblock title%} {% block main%}
+{{ super() }}
+<h3>Confirm deleting?</h3>
+<form action="/joke-delete?joke_id={{joke_id}}" method="post">
+  <div class="info">
+    {{joke}}
+
+    <div class="delete">
+      <input type="submit" value="Confirm" class="del" />
+    </div>
+  </div>
+</form>
+<div><a href="/my-saved" class="footer">Back to my favor</a></div>
+{% endblock main%}

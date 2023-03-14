@@ -1,0 +1,76 @@
+{% extends "layout.html" %} {% block title%}{% endblock title%} {% block main%}
+{{ super() }}
+<div class="info">
+  <div class="type">Type: {{ joke.category}}</div>
+  <div class="joke">{{joke.joke}}</div>
+</div>
+
+{% if name %}
+<div>
+  <form action="/my-saved" method="POST">
+    <input type="text" value="{{session.get('id')}}" name="user_id" hidden />
+    <input type="text" value="{{joke_id}}" name="joke_id" hidden />
+    <input type="submit" value="saved this joke" name="saved" class="submit" />
+  </form>
+</div>
+{% endif %}
+<div id="count">
+  <span>👍</span
+  ><span
+    >{% if good == [] or good==null%} 0 {% else %} {{ good[0][0] }}{%
+    endif%}</span
+  >
+  <span>👎</span>{% if bad == [] or bad==null%} 0 {% else %}{{ bad[0][0] }}{%
+  endif%}
+</div>
+
+<div class="info">
+  <div style="text-align: left">Comment of the joke🎸:</div>
+  <table>
+    <tbody>
+      {% for review in reviews %}
+      <tr>
+        <td>{{review[0]}}: {{review[2]}}</td>
+
+        {% if name == review[0] or admin %}
+        <td id="btn">
+          <a href="/review-edit?id={{review[5]}}">Edit</a
+          ><a href="/review-delete?id={{review[5]}}">Delete</a>
+        </td>
+
+        {% endif %}
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% if name %}
+<div class="review info">
+  <form action="/joke/{{joke_id}}" method="POST">
+    <div>
+      <label>This joke is ?</label>
+      <input type="radio" name="rating" value="good" required /><label
+        >👍</label
+      >
+      <input type="radio" name="rating" value="bad" /><label>👎</label>
+    </div>
+
+    <label id="review_label">Please write your review below👻:</label>
+    <div>
+      <textarea
+        name="review"
+        class="review_text"
+        rows="4"
+        placeholder="Write your review!"
+        required
+      ></textarea>
+    </div>
+    <input type="submit" class="submit" />
+  </form>
+</div>
+{% else %} {{ error}} {% endif %}
+<div style="margin-bottom: 40px">
+  <a href="/" class="footer">Back to search page</a>
+</div>
+{% endblock main%}

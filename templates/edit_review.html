@@ -1,0 +1,40 @@
+{% extends "layout.html" %} {% block title%}{% endblock title%} {% block main%}
+{{ super() }}
+<div class="info">
+  <div class="review">
+    <form action="/review-edit" method="POST">
+      <div>
+        <input type="text" value="{{review[4]}}" name="joke_id" hidden />
+        <input type="text" value="{{review[5]}}" name="post_id" hidden />
+        <label>This joke is ?</label>
+        {% if review[3]=="good"%}
+        <input
+          type="radio"
+          name="rating"
+          value="good"
+          checked="checked"
+          required
+        /><label>👍</label>
+        <input type="radio" name="rating" value="bad" /><label>👎</label>
+        {% else %}
+        <input type="radio" name="rating" value="good" required /><label
+          >👍</label
+        >
+        <input type="radio" name="rating" value="bad" checked="checked" /><label
+          >👎</label
+        >
+        {% endif %}
+      </div>
+      <label id="review_label">Please edit your review below👻:</label>
+      <div>
+        <textarea name="review" class="review_text" rows="3" required>
+{{review[2]}}</textarea
+        >
+      </div>
+  </div>
+  <input type="submit" class="submit" />
+</form>
+</div>
+
+<div><a href="/joke/{{review[4]}}" class="footer">Back to the joke</a></div>
+{% endblock main%}

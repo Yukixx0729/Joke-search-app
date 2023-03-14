@@ -1,0 +1,29 @@
+{% extends "layout.html" %} {% block title%}{% endblock title%} {% block main%}
+{{ super() }}
+<div class="info">
+  <h3>Edit your information</h3>
+
+  <form action="/my-info" method="POST">
+    <div class="error">{{alert}}</div>
+    <div>
+      <labl>Email</labl>
+      <input type="text" name="email" value="{{user_info[2]}}" disabled />
+    </div>
+    <div>
+      <labl>Name</labl>
+      <input type="text" name="name" value="{{user_info[1]}}" />
+    </div>
+    <input type="text" name="id" value="{{user_info[0]}}" hidden />
+    <div>
+      <labl>City</labl>
+      <input type="text" name="city" value="{{user_info[3]}}" />
+    </div>
+    <div>
+      <br />
+      <input type="submit" class="submit" />
+      <a href="/my-pw" class="submit">Change password</a>
+    </div>
+  </form>
+</div>
+<div><a href="/" class="footer">Back to search page</a></div>
+{% endblock main%}

@@ -1,0 +1,67 @@
+{% extends "layout.html" %} {% block title%}{% endblock title%} {% block main%}
+{{ super() }}
+{% for joke in jokes%}
+{% if joke[1] == None %}
+<div class="content"><span>{{joke[0]}}:</span> <image src="{{joke[2]}}" alt="funny joke image"  height="300"></image>{% if joke[4] == session.get('id') or session.get('admin')%}
+  <div class="act"><a href="edit_joke?id={{joke[3]}}">Edit</a>
+    <a href="delete_joke?id={{joke[3]}}">Delete</a></div>
+  {% endif %}</div>
+
+{% else %}
+<div class="info">{{joke[0]}}  : {{ joke[1]}}<div class="act">{% if joke[4] == session.get('id') or session.get('admin')%}
+  <a href="edit_joke?id={{joke[3]}}">Edit</a>
+    <a href="delete_joke?id={{joke[3]}}">Delete</a>
+  {% endif %}</div></div>
+
+{% endif %}
+{% endfor%}
+{% if session.get('name')%}
+<div class="info"><form>
+  <h3>Please pick the type of your joke:</h3>
+  <div>
+    <label for="option1">Text</label>
+    <input type="radio" name="type" value="text" id="option1" />
+    <label for="option2">Image/gif</label>
+    <input type="radio" name="type" value="image" id="option2" />
+  </div>
+</form>
+<div>
+  <form action="/post-joke" method="post" id="option1Form">
+    <div>
+      <textarea
+        rows="4"
+        name="text"
+        class="review_text"
+        placeholder="Please write down your joke"
+        required
+      ></textarea>
+      <div><input type="submit" value="Post" class="submit" /></div>
+    </div>
+  </form>
+</div>
+<div>
+  <form action="/post-joke" method="post" id="option2Form" enctype=multipart/form-data>
+    <input type="file" name="image" required />
+    <input type="submit" value="Post" class="submit" />
+  </form>
+</div></div>
+{% endif %}
+<div style="margin-bottom: 40px;"><a href="/" class="footer">Back to search page</a></div>
+
+<script>
+  const option1Form = document.getElementById("option1Form");
+  const option2Form = document.getElementById("option2Form");
+  const option1 = document.getElementById("option1");
+  const option2 = document.getElementById("option2");
+  option1Form.style.display = "none";
+  option2Form.style.display = "none";
+  option1.addEventListener("click", () => {
+    option1Form.style.display = "block";
+    option2Form.style.display = "none";
+  });
+  option2.addEventListener("click", () => {
+    option1Form.style.display = "none";
+    option2Form.style.display = "block";
+  });
+</script>
+{% endblock main%}

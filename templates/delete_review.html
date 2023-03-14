@@ -1,0 +1,19 @@
+{% extends "layout.html" %} {% block title%}{% endblock title%} {% block main%}
+{{ super() }}
+<div class="info">
+  {% if review[3]=='good'%}
+  <div>Rating: 👍</div>
+  {% else %}
+  <div>Rating:👎</div>
+  {% endif %}
+  <div>Your review: {{ review[2] }}</div>
+
+  <form action="/review-delete" method="post">
+    <input type="text" value="{{review[4]}}" name="joke_id" hidden />
+    <input type="text" value="{{review[5]}}" name="post_id" hidden />
+    <input type="submit" value="Delete" class="submit" />
+  </form>
+</div>
+
+<div><a href="/joke/{{review[4]}}" class="footer">Back to the joke</a></div>
+{% endblock main%}

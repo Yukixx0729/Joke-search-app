@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Search your joke today!😃{% block title%}{% endblock title%}</title>
+    <meta name="description" content="" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/static/style.css" />
+  </head>
+  <body>
+    {% block main%}
+    <main>
+      <div id="login-container">
+        {%if session %}
+        <form action="/logout" method="post">
+          <span id="welcome">Welcome {{name}}!🌞</span>
+          <button type="submit" class="submit">Logout</button>
+        </form>
+        {% else %}<a href="/login">Back to login</a> {%endif %}
+      </div>
+      <h1>Fun Joke</h1>
+      <nav>
+        <a href="/top-joke">Top 3 jokes</a>|
+        <a href="/post-joke">Post Joke</a>{% if session.get('name') %} |
+        <div class="dropdown">
+          <button id="dropbtn">My settings</button>
+          <div id="mySetting" class="dropdown-content">
+            <a href="/my-info">My info</a>
+            <a href="/my-post">My posts</a>
+            <a href="/my-saved">Saved</a>
+            <a href="/my-comment">My comment</a>
+          </div>
+        </div>
+        {% endif%} {% if session.get('admin')==true %}|
+        <a href="/admin">Admin</a>
+        {% endif%}
+      </nav>
+
+      {% endblock main%}
+    </main>
+    <script src="/static/script.js" async defer></script>
+  </body>
+  {% block footer%}
+  <div id="footer">@Yuki 2023|All rights reserved</div>
+  {% endblock footer%}
+</html>

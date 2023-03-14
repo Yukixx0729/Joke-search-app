@@ -1,0 +1,21 @@
+{% extends "layout.html" %} {% block title%}{% endblock title%} {% block main%}
+{{ super() }}
+
+<div class="info">
+  <h3>Change your password</h3>
+  <form action="/my-pw" method="POST">
+    <div class="error">{{ error }}</div>
+    <input type="text" name="id" value="{{user_info[0]}}" hidden />
+    <label>New password</label>
+    <input type="password" name="new_pw1" required />
+
+    <div>
+      <label>Please enter again</label
+      ><input type="password" name="new_pw2" required />
+    </div>
+    <br />
+    <input type="submit" class="submit" />
+  </form>
+</div>
+<div><a class="footer" href="/">Back to search page</a></div>
+{% endblock main%}

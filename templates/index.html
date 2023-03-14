@@ -1,0 +1,73 @@
+{% extends "layout.html" %} {% block title%}{% endblock title%} {% block main%}
+<main>
+  <div id="big-container">
+    <div id="login-container" class="info">
+      {%if session %}
+      <form action="/logout" method="post">
+        <span id="welcome">Welcome {{name}}!🌞</span>
+        <input type="submit" class="submit" value="Log out"></input>
+      </form>
+      {% else %}<a href="/login">Back to login</a> {%endif %}
+    </div>
+    <div id="weather" class="info">
+      City: {{weather['city']}} Temp: {{weather['temp_c']}}°C<img
+      src={{weather['icon']}} height="40px">
+    </div>
+  </div>
+  <h1>Fun Joke</h1>
+  <nav>
+    <a href="/top-joke">Top 3 jokes</a>| <a href="/post-joke">Post Joke</a>{% if
+    session.get('name') %}|
+    <div class="dropdown">
+      <button  id="dropbtn">My settings</button>
+      <div id="mySetting" class="dropdown-content">
+        <a href="/my-info">My info</a>
+        <a href="/my-post">My posts</a>
+        <a href="/my-saved">Saved</a>
+        <a href="/my-comment">My comment</a>
+      </div>
+    </div>
+    {% endif%} {% if session.get('admin')==true %} | <a href="/admin">Admin</a>
+    {% endif%}
+  </nav>
+
+  <div class="info">
+    <form action="/" method="post">
+      <label for="search">Jokes' keyword🔎:</label>
+      <input type="text" name="search" />
+      <br />
+      <label for="jokes">Pick the type of the joke📖:</label>
+
+      <select name="jokes" id="jokes" required>
+        <option value="Any">Any</option>
+        <option value="Programming">Programming</option>
+        <option value="Misc">Misc</option>
+        <option value="Dark">Dark</option>
+        <option value="Pun">Pun</option>
+        <option value="Spooky">Spooky</option>
+        <option value="Christmas">Christmas</option>
+      </select>
+      <input type="submit" value="Search" class="submit" />
+    </form>
+  </div>
+  <div class="error">{{error }}</div>
+  {% for joke in jokes%}
+  <p><a href="/joke/{{joke.id}}" class="joke_link">Joke</a>:{{ joke.joke }}</p>
+  {% endfor %} {% endblock main%}
+</main>
+{% block footer%}
+  <div id="footer">@Yuki 2023|All rights reserved</div>
+  {% endblock footer%}
+<script>
+const settings = document.getElementById("mySetting");
+const btn = document.getElementById("dropbtn");
+function dropdown() {
+  settings.classList.toggle("show");
+}
+btn.addEventListener("click", dropdown);
+window.onclick = function (event) {
+  if (event.target != btn) {
+    settings.classList.remove("show");
+  }
+};
+</script>

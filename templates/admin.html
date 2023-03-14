@@ -1,0 +1,32 @@
+{% extends "layout.html" %} {% block title%}{% endblock title%} {% block main%}
+{{ super() }}
+<div class="info">
+  <table>
+    <thead>
+      <th>Id</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>City</th>
+      <th>Admin</th>
+      <th>Edit</th>
+      <th>Delete</th>
+    </thead>
+    <tbody>
+      {% for user in users %}
+      <tr>
+        <td>{{user[0]}}</td>
+        <td>{{user[1]}}</td>
+        <td>{{user[2]}}</td>
+        <td>{{user[3]}}</td>
+        <td>{{user[4]}}</td>
+        <td><a href="/edit-users?id={{user[0]}}">Edit</a></td>
+        <td><a href="/delete-users?id={{user[0]}}">Delete</a></td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+<div>
+  <a href="/" class="footer">Back to search page</a>
+</div>
+{% endblock main%}

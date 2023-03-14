@@ -1,0 +1,17 @@
+{% extends "layout.html" %} {% block title%}{% endblock title%} {% block main%}
+{{ super() }}
+
+<div class="info">
+  <h3>My saved jokes</h3>
+  {% for joke in jokes%}
+  <div class="saved">{{joke[1]}}</div>
+  <div class="delete">
+    <a href="/joke-delete?joke_id={{ joke[0]}}" class="del">Delete</a>
+  </div>
+  <br />
+  {% endfor %}
+</div>
+<div style="margin-bottom: 40px">
+  <a href="/" class="footer">Back to search page</a>
+</div>
+{% endblock main%}

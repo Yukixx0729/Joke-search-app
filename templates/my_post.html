@@ -1,0 +1,31 @@
+{% extends "layout.html" %} {% block title%}{% endblock title%} {% block main%}
+{{ super() }}
+
+<div class="info">
+  <h3>My posts📨</h3>
+  {%if jokes.length==0%}
+  <div>You haven't posted any joke yet.</div>
+  {%else%} {% for joke in jokes%} {% if joke[1]==None%}
+  <div>
+    <image src="{{joke[2]}}" alt="funny joke image" height="300"></image>
+    <div class="act">
+      <a href="edit_joke?id={{joke[0]}}">Edit</a>
+      <a href="delete_joke?id={{joke[0]}}">Delete</a>
+    </div>
+  </div>
+  <br />
+  {% else%}
+  <div>
+    {{joke[1]}}
+    <div class="act">
+      <a href="edit_joke?id={{joke[0]}}">Edit</a>
+      <a href="delete_joke?id={{joke[0]}}">Delete</a>
+    </div>
+  </div>
+  <br />
+  {% endif%} {% endfor%} {% endif%}
+</div>
+<div style="margin-bottom: 40px">
+  <a href="/" class="footer">Back to search page</a>
+</div>
+{% endblock main%}

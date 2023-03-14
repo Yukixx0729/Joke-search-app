@@ -1,0 +1,26 @@
+{% extends "layout.html" %} {% block title%}{% endblock title%} {% block main%}
+{{ super() }}
+<div class="info">
+  <form action="/edit-users?id={{user[0]}}" method="POST">
+    <input type="text" value="{{user[0]}}" name="id" hidden />
+    <div>
+      <label>Name</label>
+      <input type="text" value="{{user[1]}}" name="name" />
+    </div>
+    <div>
+      <label>Email</label>
+      <input type="email" value="{{user[2]}}" name="email" />
+    </div>
+    <div>
+      <label>City</label> <input type="text" value="{{user[3]}}" name="city" />
+    </div>
+    <div>
+      <label>Admin</label>
+      <input type="text" value="{{user[4]}}" name="admin" />
+    </div>
+    <div><input type="submit" class="submit" value="confirm" /></div>
+  </form>
+</div>
+
+<div><a class="footer" href="/admin">Back to admin page</a></div>
+{% endblock main %}

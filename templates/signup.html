@@ -1,0 +1,23 @@
+{% extends "layout.html" %} {% block title%}Sign up now!{% endblock title%} {%
+block main%}
+<h1>Fun Joke</h1>
+<h3>Sign up now!</h3>
+<div class="error">{{ error }}</div>
+<div class="info">
+  <form action="/signup" method="POST">
+    <div><label>Name:</label> <input type="text" name="name" required /></div>
+    <div>
+      <label>Email:</label> <input type="email" name="email" required />
+    </div>
+    <div><label>City:</label> <input type="text" name="city" required /></div>
+    <div>
+      <label>Password:</label>
+      <input type="password" name="password1" required />
+      <input type="password" name="password2" required />
+    </div>
+    <input type="submit" value="Sign up" class="submit" />
+  </form>
+</div>
+
+<div><a href="/login" class="footer">back to log in</a></div>
+{% endblock main%}

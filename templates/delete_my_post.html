@@ -1,0 +1,14 @@
+{% extends "layout.html" %} {% block title%}{% endblock title%} {% block main%}
+{{ super() }}
+<div class="info">
+  <h3>Delete your post?</h3>
+  {% if joke[1]==None%} {{joke[2]}} {% else %}
+  <img src="{{joke[1]}}" alt="joke image" height="300" />
+  {% endif %}
+
+  <form action="/delete_joke?id={{joke_id}}" method="POST">
+    <br />
+    <input type="submit" value="Confirm" class="submit" />
+  </form>
+</div>
+{% endblock main%}

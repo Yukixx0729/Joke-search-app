@@ -1,0 +1,22 @@
+{% extends "layout.html" %} {% block title%}Sign up now!{% endblock title%} {%
+block main%} {{super()}}
+<div class="info">
+  <h3>My comments</h3>
+  {% for review in reviews%} {% if review[2]=="good"%}
+  <div class=".top">
+    {{review[0]}}: 👍 {{review[1]}}
+    <a href="/joke/{{review[3]}}" class="footer">To joke</a>
+  </div>
+  <br />
+  {% else %}
+  <div class=".top">
+    {{review[0]}}: 👎 {{review[1]}}
+    <a href="/joke/{{review[3]}}" class="footer">To joke</a>
+  </div>
+  <br />
+  {% endif %} {% endfor %}
+</div>
+<div style="margin-bottom: 40px">
+  <a href="/" class="footer">Back to search page</a>
+</div>
+{% endblock main%}
