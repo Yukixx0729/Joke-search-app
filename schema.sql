@@ -19,7 +19,7 @@ CREATE TABLE posts (
     user_id INT,
     CONSTRAINT fk_user_posts
         FOREIGN KEY (user_id)
-        REFERENCES users(id)
+        REFERENCES users(id) ON DELETE CASCADE
 );
 
 DROP TABLE IF EXISTS myfav CASCADE;
@@ -29,7 +29,7 @@ CREATE TABLE myfav (
     user_id INT NOT NULL,
     CONSTRAINT fk_user_myfav
         FOREIGN KEY (user_id)
-        REFERENCES users(id)
+        REFERENCES users(id) ON DELETE CASCADE
 );
 
 DROP TABLE IF EXISTS blog CASCADE;
@@ -40,19 +40,6 @@ CREATE TABLE blog (
     user_id INT NOT NULL,
     CONSTRAINT fk_user_blog
         FOREIGN KEY (user_id)
-        REFERENCES users(id)
+        REFERENCES users(id) ON DELETE CASCADE
 );
 
--- DROP TABLE IF EXISTS likes CASCADE;
--- CREATE TABLE likes (
---     id SERIAL PRIMARY KEY,
---     joke_id INT NOT NULL,
---     user_id INT NOT NULL,
---     rating boolean NOT NULL,
---     CONSTRAINT fk_blog_likes
---         FOREIGN KEY (joke_id)
---         REFERENCES blog(id),
---     CONSTRAINT fk_user_likes
---         FOREIGN KEY (user_id)
---         REFERENCES users(id)
--- );
