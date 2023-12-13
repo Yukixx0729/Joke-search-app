@@ -1,4 +1,4 @@
-# Jokes Search app
+# Jokes Search app(Python full stack app)
 
 ## Description
 
